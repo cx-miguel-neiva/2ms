@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-Found a bug? You're welcome to [![GitHub Discussions](https://img.shields.io/badge/chat-discussions-blue.svg?style=flat-square)](https://github.com/Checkmarx/kics/discussions)
+Found a bug? You're welcome to [![GitHub Discussions](https://img.shields.io/badge/chat-discussions-blue.svg?style=flat-square)](https://github.com/Checkmarx/2ms/discussions)
 
 
 - **Please make sure to:**
@@ -18,7 +18,7 @@ Found a bug? You're welcome to [![GitHub Discussions](https://img.shields.io/bad
 
 ### Expected Behavior
 
-(Which results are expected from KICS?)
+(Which results are expected from 2ms?)
 
 
 
