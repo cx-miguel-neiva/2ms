@@ -57,7 +57,7 @@ jobs:
         comment-tag: title_check
         mode: recreate
         create-if-not-exists: true
-        github-token: ${{ secrets.TWO_BOT_PAT }}
+        github-token: ${{ secrets.TWOMS_BOT_PAT }}
     - name: Workflow failed
       if: env.TITLE_CHECK_FAILED == 'true'
       run: exit 1

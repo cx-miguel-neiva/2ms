@@ -4,7 +4,7 @@ For **bug**:
 
 `bug(<scope>): <title starting with lowercase letter>`
 
-For **query**:
+For **rule**:
 
 `rule(<platform>): <title starting with lowercase letter>`
 
