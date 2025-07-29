@@ -33,7 +33,7 @@ jobs:
     - name: Check for comment tag
       if: env.TITLE_CHECK_FAILED != 'true'
       run: |
-        comments=$(curl -s -H "Authorization: token ${{ secrets.KICS_BOT_PAT }}" \
+        comments=$(curl -s -H "Authorization: token ${{ secrets.TWOMS_BOT_PAT}}" \
             -X GET "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments")
         if echo "$comments" | grep -q "title_check"; then
           echo "TAG_EXISTS=true" >> $GITHUB_ENV
@@ -48,7 +48,7 @@ jobs:
           Deleting comment, please refresh the page...
         comment-tag: title_check
         mode: delete
-        github-token: ${{ secrets.KICS_BOT_PAT }}
+        github-token: ${{ secrets.TWOMS_BOT_PAT }}
     - name: Add comment if title fails
       if: env.TITLE_CHECK_FAILED == 'true'
       uses: thollander/actions-comment-pull-request@e4a76dd2b0a3c2027c3fd84147a67c22ee4c90fa
@@ -57,7 +57,7 @@ jobs:
         comment-tag: title_check
         mode: recreate
         create-if-not-exists: true
-        github-token: ${{ secrets.KICS_BOT_PAT }}
+        github-token: ${{ secrets.TWO_BOT_PAT }}
     - name: Workflow failed
       if: env.TITLE_CHECK_FAILED == 'true'
       run: exit 1
@@ -108,15 +108,15 @@ jobs:
             curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X DELETE -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/bug
           fi
         fi
-    - name: Add query label
+    - name: Add bug label (extra)
       run: |
-        if echo "$TITLE $BODY" | grep -iqP "(\\b|_)quer(y|ies)(\\b|_)" || echo "$BODY" | grep -iqP "### Platform" || echo "$BODY" | grep -iqP "### Provider"; then
-          echo "Adding 'query' label... "
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X POST -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels -d '{"labels": ["query"]}'
+        if echo "$TITLE $BODY" | grep -iqP "(\\b|_)bugs?(\\b|_)" || echo "$BODY" | grep -iqP "steps to reproduce" || echo "$BODY" | grep -iqP "actual behavior" || echo "$BODY" | grep -iqP "expected behavior"; then
+          echo "Adding 'bug' label (extra)..."
+          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X POST -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels -d '{"labels": ["bug"]}'
         else
-          if echo "$LABELS" | grep -q "query"; then
-            echo "Removing 'query' label..."
-            curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X DELETE -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/query
+          if echo "$LABELS" | grep -q "bug"; then
+            echo "Removing 'bug' label (extra)..."
+            curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X DELETE -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/bug
           fi
         fi
     - name: Set up Python

@@ -1,6 +1,6 @@
 ---
 name: Rule Request
-about: Template to create/change a Rule
+about: Template to create/update a rule
 title: 'rule(<platform>): <title starting with lowercase letter>'
 labels: community, rule
 assignees: ''
